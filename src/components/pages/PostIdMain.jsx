@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import PostService from '../../API/PostService';
 import { useFetching } from '../hooks/useFetching';
 import { useState } from 'react';
+import { Loader } from '../Loading/Loader';
 
 export const PostIdMain = () => {
 
@@ -22,7 +23,13 @@ export const PostIdMain = () => {
   return (
     <div>
         <h1>{post.id}.{post.title}</h1>
-        <h2>{post.body}</h2>
+
+        {isLoading
+            ?<Loader/>
+            : <h2>{post.body}</h2>
+        }
+
+       
     </div>
   )
 }
