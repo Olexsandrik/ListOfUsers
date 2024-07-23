@@ -5,8 +5,8 @@ export const usePagination = (totalPages) =>{
     const pagesArray = useMemo(() => {
         let array = [];
     
-        for (let i = 0; i < totalPages; i++) {
-          array.push(i+1);
+        for (let i = 1; i <= totalPages; i++) {
+          array.push(i);
         }
         return array;
       }, [totalPages])

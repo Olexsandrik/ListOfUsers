@@ -49,7 +49,6 @@ export function Posts() {
 
   const changePage=(page)=>{
     setPage(page);
-  
   }
 
  

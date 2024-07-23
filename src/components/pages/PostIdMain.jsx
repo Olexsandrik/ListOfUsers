@@ -9,6 +9,7 @@ export const PostIdMain = () => {
 
     const params = useParams();
     const [post, setPost] = useState({});
+    const [comment, setComment] = useState([]);
 
     const [fetchingPostById, isLoading, error] = useFetching(async  ()=>{
         const response =  await PostService.getById(params.id);
@@ -16,8 +17,15 @@ export const PostIdMain = () => {
 
     });
 
+    const [fetchComment, isLoadingComment, errorComment] = useFetching(async  ()=>{
+        const response =  await PostService.getByComment(params.id);
+        setComment(response.data);
+
+    });
+
     useEffect(()=>{
         fetchingPostById();
+        fetchComment();
     },[])
 
   return (
@@ -27,8 +35,24 @@ export const PostIdMain = () => {
         {isLoading
             ?<Loader/>
             : <h2>{post.body}</h2>
+            
         }
+        <h1>Коментраі</h1>
 
+        <hr />
+        {
+            isLoadingComment
+            ? <Loader/>
+            : <div>{comment.map(comn=>
+                    <div>
+                        <h1>{comn.name}</h1>
+                        <h2>comn.email</h2>
+                    </div>
+            )}
+            </div>
+            
+        }
+       
        
     </div>
   )
